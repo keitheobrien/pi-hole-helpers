@@ -23,7 +23,7 @@ chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
 echo "# Register pihole-helper to easily add a custom DNS entry" >> ~/.bashrc
-echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'"
+echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> ~/.bashrc
 
 # reload bashrc
 source ~/.bashrc
