@@ -72,14 +72,10 @@ function add_dns_entry() {
   # get host name
   ask_hostname
 
-  # check if the conf file exists
-  if [ -e /etc/dnsmasq.d/02-lan.conf ]
+  # check if line is in the conf file, if not add it
+  if ! grep -Fxq "addn-hosts=/etc/pihole/lan.list" /etc/dnsmasq.d/02-lan.conf
   then
-    # check if line is in the conf file, if not add it
-    if ! grep -Fxq "addn-hosts=/etc/pihole/lan.list" my_list.txt
-    then
-      echo "addn-hosts=${CUSTOM_LIST}" >> /etc/dnsmasq.d/02-lan.conf
-    fi
+    echo "addn-hosts=${CUSTOM_LIST}" >> /etc/dnsmasq.d/02-lan.conf
   fi
 
   # add entry
