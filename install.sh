@@ -22,6 +22,7 @@ chmod +x /opt/pihole/whiptail.sh
 chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
+USER=$(who am i | awk '{print $1}')
 echo "" >> /home/${USER}/.bashrc
 echo "alias sudo='sudo '" >> /home/${USER}/.bashrc
 echo "" >> /home/${USER}/.bashrc
