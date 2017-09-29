@@ -14,8 +14,8 @@ then
 fi
 
 # get and save the scripts
-wget -O /opt/pihole/whiptail.sh url_here # TODO
-wget -O /opt/pihole/pihole-helper.sh url_here # TODO
+wget -O /opt/pihole/whiptail.sh https://raw.githubusercontent.com/Kevin-De-Koninck/pi-hole-helpers/master/whiptail.sh
+wget -O /opt/pihole/pihole-helper.sh https://raw.githubusercontent.com/Kevin-De-Koninck/pi-hole-helpers/master/pihole-helper.sh
 
 # Make 'em executable
 chmod +X /opt/pihole/whiptail.sh
