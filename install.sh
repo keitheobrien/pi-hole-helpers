@@ -22,8 +22,12 @@ chmod +x /opt/pihole/whiptail.sh
 chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
+echo "" >> ~/.bashrc
+echo "alias sudo='sudo '" >> ~/.bashrc
+echo "" >> ~/.bashrc
 echo "# Register pihole-helper to easily add a custom DNS entry" >> ~/.bashrc
 echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> ~/.bashrc
+echo "" >> ~/.bashrc
 
 # reload bashrc
 source ~/.bashrc
