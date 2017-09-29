@@ -22,16 +22,16 @@ chmod +x /opt/pihole/whiptail.sh
 chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
-USER=$(who am i | awk '{print $1}')
-echo "" >> /home/${USER}/.bashrc
-echo "alias sudo='sudo '" >> /home/${USER}/.bashrc
-echo "" >> /home/${USER}/.bashrc
-echo "# Register pihole-helper to easily add a custom DNS entry" >> /home/${USER}/.bashrc
-echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> /home/${USER}/.bashrc
-echo "" >> /home/${USER}/.bashrc
+real_user=$(who am i | awk '{print $1}')
+echo "" >> /home/${real_user}/.bashrc
+echo "alias sudo='sudo '" >> /home/${real_user}/.bashrc
+echo "" >> /home/${real_user}/.bashrc
+echo "# Register pihole-helper to easily add a custom DNS entry" >> /home/${real_user}/.bashrc
+echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> /home/${real_user}/.bashrc
+echo "" >> /home/${real_user}/.bashrc
 
 # reload bashrc
-source /home/${USER}/.bashrc
+source /home/${real_user}/.bashrc
 
 # Inform the user
 echo "--------------------------------------------------------------------------"
