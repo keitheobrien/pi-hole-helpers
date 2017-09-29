@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Check if root
-#if [ "$EUID" -ne 0 ]
-#  then echo "Please run as root or use sudo..."
-#  exit 1
-#fi
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root or use sudo..."
+  exit 1
+fi
 
 # see if pi-hole dir exists
 if ! [ -e /opt/pihole/ ]
