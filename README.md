@@ -20,8 +20,9 @@ pihole-helper --add-dns-entry
 sudo rm -f /opt/pihole/whiptail.sh
 sudo rm -f /opt/pihole/pihole-helper.sh
 sudo rm -f /etc/pihole/custom-LAN.list
-sed -i '/custom-LAN.list/d' /etc/dnsmasq.d/02-lan.conf
+sudo rm -f /etc/dnsmasq.d/02-lan.conf
 sed -i '/pihole-helper/d' ~/.bashrc
+sed -i '/alias sudo=/d' ~/.bashrc
 ```
 
 # Bonus: Expand domain list
