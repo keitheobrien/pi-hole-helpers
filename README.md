@@ -15,6 +15,15 @@ sudo /tmp/install.sh
 pihole-helper --add-dns-entry
 ```
 
+# Uninstall
+```bash
+sudo rm -f /opt/pihole/whiptail.sh
+sudo rm -f /opt/pihole/pihole-helper.sh
+sudo rm -f /etc/pihole/custom-LAN.list
+sed -i '/custom-LAN.list/d' /etc/dnsmasq.d/02-lan.conf
+sed -i '/pihole-helper/d' ~/.bashrc
+```
+
 # Bonus: Expand domain list
 This will expand your blocklist to about 2.000.000 domains. Check the file to see which ones will be blocked and which ones are on a custom white list (to keep functionality).
 ```bash
