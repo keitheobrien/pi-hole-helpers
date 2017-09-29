@@ -18,8 +18,8 @@ wget -O /opt/pihole/whiptail.sh https://raw.githubusercontent.com/Kevin-De-Konin
 wget -O /opt/pihole/pihole-helper.sh https://raw.githubusercontent.com/Kevin-De-Koninck/pi-hole-helpers/master/pihole-helper.sh
 
 # Make 'em executable
-chmod +X /opt/pihole/whiptail.sh
-chmod +X /opt/pihole/pihole-helper.sh
+chmod +x /opt/pihole/whiptail.sh
+chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
 echo "# Register pihole-helper to easily add a custom DNS entry" >> ~/.bashrc
