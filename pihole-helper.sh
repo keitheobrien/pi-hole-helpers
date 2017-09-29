@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./whiptail.sh
+source /opt/pihole/whiptail.sh
 ADD_ENTRY=true
 CUSTOM_LIST="/etc/pihole/custom-LAN.list"
 title_of_installer="Pi-Hole DNS extender"
@@ -88,7 +88,7 @@ function add_dns_entry() {
   # reload dnsmasq service
   service dnsmasq force-reload
 
-  w_show_message "${title_of_installer}" "\n\You can now reach your device on http://${fqdn}.\nHave fun!"
+  w_show_message "${title_of_installer}" "\n\nYou can now reach your device on http://${fqdn}.\nHave fun!"
 }
 
 
