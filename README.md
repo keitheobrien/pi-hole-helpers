@@ -5,7 +5,9 @@ With this, you can now reach your local devices using a readable URL (e.g. http:
 # Install
 On a clean pi-hole, install the helper with the following command:
 ```bash
-curl -sSL https://goo.gl/bwy8Yo | bash
+wget -O /tmp/install.sh https://goo.gl/bwy8Yo
+chmod +X /tmp/install.sh
+sudo /tmp/install.sh
 ```
 
 # Usage
