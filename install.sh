@@ -22,20 +22,24 @@ chmod +x /opt/pihole/whiptail.sh
 chmod +x /opt/pihole/pihole-helper.sh
 
 # register command
-echo "" >> ~/.bashrc
-echo "alias sudo='sudo '" >> ~/.bashrc
-echo "" >> ~/.bashrc
-echo "# Register pihole-helper to easily add a custom DNS entry" >> ~/.bashrc
-echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> ~/.bashrc
-echo "" >> ~/.bashrc
+echo "" >> /home/${USER}/.bashrc
+echo "alias sudo='sudo '" >> /home/${USER}/.bashrc
+echo "" >> /home/${USER}/.bashrc
+echo "# Register pihole-helper to easily add a custom DNS entry" >> /home/${USER}/.bashrc
+echo "alias pihole-helper='/opt/pihole/pihole-helper.sh'" >> /home/${USER}/.bashrc
+echo "" >> /home/${USER}/.bashrc
 
 # reload bashrc
-source ~/.bashrc
+source /home/${USER}/.bashrc
 
 # Inform the user
+echo "--------------------------------------------------------------------------"
+echo ""
+echo "PLEASE RUN 'source ~/.bashrc' IN YOUR TERMINAL TO SYNC EVERYTHING."
 echo ""
 echo "You can now use the 'pihole-helper' command to add custom DNS entries."
 echo "Use 'pihole-helper -h' to view your options."
 echo ""
+
 
 exit 0
