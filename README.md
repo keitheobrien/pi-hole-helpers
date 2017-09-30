@@ -12,7 +12,10 @@ sudo /tmp/install.sh
 
 # Usage
 ```bash
-pihole-helper --add-dns-entry
+# add entry
+sudo pihole-helper
+# remove entry
+sudo pihole-helper --remove-dns-entry
 ```
 
 # Uninstall
