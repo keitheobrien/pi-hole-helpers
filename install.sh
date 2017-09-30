@@ -21,6 +21,9 @@ wget -O /opt/pihole/pihole-helper.sh https://raw.githubusercontent.com/Kevin-De-
 chmod +x /opt/pihole/whiptail.sh
 chmod +x /opt/pihole/pihole-helper.sh
 
+# Register our custom list
+echo "addn-hosts=/etc/pihole/custom-LAN.list" > /etc/dnsmasq.d/02-custom-LAN.conf
+
 # register command
 real_user=$(who am i | awk '{print $1}')
 echo "" >> /home/${real_user}/.bashrc

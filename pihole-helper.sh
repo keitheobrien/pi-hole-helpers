@@ -65,9 +65,9 @@ function add_dns_entry() {
   ask_fqdn
 
   # check if line is in the conf file, if not add it
-  if ! grep -Fxq "addn-hosts=${CUSTOM_LIST}" /etc/dnsmasq.d/02-lan.conf &> /dev/null
+  if ! grep -q "addn-hosts=${CUSTOM_LIST}" /etc/dnsmasq.d/02-lan.conf
   then
-    echo "addn-hosts=${CUSTOM_LIST}" >> /etc/dnsmasq.d/02-lan.conf
+    echo "addn-hosts=${CUSTOM_LIST}" > /etc/dnsmasq.d/02-lan.conf
   fi
 
   # add entry
@@ -75,23 +75,24 @@ function add_dns_entry() {
 
   # reload dnsmasq service
   echo 'Restarting a service, please wait...'
-  service dnsmasq restart
+  service dnsmasq restart &
 
   # Wait for the changes to take effect
   {
     echo 0
     for i in {1..100..5}
     do
-      if [ i -eq 95 ]
+      if [ ${i} -eq 95 ]
       then
         echo "Fatal error, you're on your own now!"
         sleep 1
         exit 1
       fi
-      if nslookup pi.hole | grep -q $(hostname -I)
+      if nslookup "${fqdn}" | grep -q ${ip_address}
       then
        echo 100
        sleep 0.6
+       break
       fi
     sleep 0.5
     done
@@ -119,9 +120,9 @@ function remove_dns_entry() {
   fi
 
   # reload dnsmasq service
-  service dnsmasq force-reload
+  service dnsmasq restart
 
-  w_show_message "${title_of_installer}" "\n\The DNS entry for http://${fqdn} has been removed.\nHave fun!"
+  w_show_message "${title_of_installer}" "\n\nThe DNS entry for http://${fqdn} has been removed.\nHave fun!"
 }
 
 # ------------------------------------------------------------------------------
