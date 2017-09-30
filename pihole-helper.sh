@@ -51,11 +51,6 @@ function ask_fqdn() {
   fqdn=$(echo ${fqdn} | tr -d ' ')  # Remove spaces
 }
 
-function ask_hostname() {
-  hostname=$(w_get_string "${title_of_installer}" "\n\nWhat's the hostname of the local device?\nSpaces will be truncated automatically.\n\n" "ubuntu")
-  hostname=$(echo ${hostname} | tr -d ' ')  # Remove spaces
-}
-
 function add_dns_entry() {
   # show welcome message
   if ! ( w_ask_yesno "${title_of_installer}" "\n\nThis will add a custom DNS entry to your pi-hole so that you can reach local devices using a readable url (e.g. movie.server).\n\n\nDo you want to continue?" )
@@ -69,17 +64,14 @@ function add_dns_entry() {
   # get desired address
   ask_fqdn
 
-  # get host name
-  ask_hostname
-
   # check if line is in the conf file, if not add it
-  if ! grep -Fxq "addn-hosts=/etc/pihole/lan.list" /etc/dnsmasq.d/02-lan.conf
+  if ! grep -Fxq "addn-hosts=${CUSTOM_LIST}" /etc/dnsmasq.d/02-lan.conf &> /dev/null
   then
     echo "addn-hosts=${CUSTOM_LIST}" >> /etc/dnsmasq.d/02-lan.conf
   fi
 
   # add entry
-  echo "${ip_address} ${fqdn} ${hostname}" >> ${CUSTOM_LIST}
+  echo "${ip_address} ${fqdn}" >> ${CUSTOM_LIST}
 
   # reload dnsmasq service
   service dnsmasq force-reload
