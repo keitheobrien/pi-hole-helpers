@@ -91,7 +91,7 @@ function add_dns_entry() {
     done
   } | w_show_gauge "${title_of_installer}" "\n\nWaiting for the changes to come active..."
 
-  w_show_message "${title_of_installer}" "\n\nYou can now reach your device on http://${fqdn}.\nHave fun!"
+  w_show_message "${title_of_installer}" "\n\nYou can now reach your device on http://${fqdn}\nHave fun!"
 }
 
 
