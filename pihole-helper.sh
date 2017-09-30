@@ -75,6 +75,26 @@ function add_dns_entry() {
 
   # reload dnsmasq service
   service dnsmasq force-reload
+  service dnsmasq restart
+
+  # Wait for the changes to take effect
+  {
+    echo 0
+    for i in {1..100..5}
+    do
+      if [ i -eq 95]
+      then
+        echo "Fatal error, you're on your own now!"
+        sleep 1
+        exit 1
+      fi
+      if nslookup pi.hole | grep -q $(hostname -I)
+      then
+       echo 100
+       sleep 0.6
+      fi
+    done
+  } | w_show_gauge "${title_of_installer}" "\n\nWaiting for the changes to come active..."
 
   w_show_message "${title_of_installer}" "\n\nYou can now reach your device on http://${fqdn}.\nHave fun!"
 }
