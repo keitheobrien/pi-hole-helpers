@@ -68,7 +68,6 @@ function add_dns_entry() {
   echo "${ip_address} ${fqdn}" >> ${CUSTOM_LIST}
 
   # reload dnsmasq service
-  echo 'Restarting a service, please wait...'
   service dnsmasq restart &
 
   # Wait for the changes to take effect
@@ -115,7 +114,7 @@ function remove_dns_entry() {
   fi
 
   # reload dnsmasq service
-  service dnsmasq restart
+  service dnsmasq restart &
 
   w_show_message "${title_of_installer}" "\n\nThe DNS entry for http://${fqdn} has been removed.\nHave fun!"
 }
