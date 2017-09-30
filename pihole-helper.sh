@@ -74,7 +74,7 @@ function add_dns_entry() {
   echo "${ip_address} ${fqdn}" >> ${CUSTOM_LIST}
 
   # reload dnsmasq service
-  service dnsmasq force-reload
+  echo 'Restarting a service, please wait...'
   service dnsmasq restart
 
   # Wait for the changes to take effect
@@ -82,7 +82,7 @@ function add_dns_entry() {
     echo 0
     for i in {1..100..5}
     do
-      if [ i -eq 95]
+      if [ i -eq 95 ]
       then
         echo "Fatal error, you're on your own now!"
         sleep 1
@@ -93,6 +93,7 @@ function add_dns_entry() {
        echo 100
        sleep 0.6
       fi
+    sleep 0.5
     done
   } | w_show_gauge "${title_of_installer}" "\n\nWaiting for the changes to come active..."
 
