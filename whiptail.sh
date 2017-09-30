@@ -53,3 +53,11 @@ function w_ask_yesno {
     return 1
   fi
 }
+
+# $1: title
+# $2: text
+# $3: percent
+function w_show_gauge {
+  read percent
+  whiptail --title "${1}" --gauge "${2}" 8 ${c_whiptail} ${percent}
+}
