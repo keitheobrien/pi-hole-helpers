@@ -64,12 +64,6 @@ function add_dns_entry() {
   # get desired address
   ask_fqdn
 
-  # check if line is in the conf file, if not add it
-  if ! grep -q "addn-hosts=${CUSTOM_LIST}" /etc/dnsmasq.d/02-lan.conf
-  then
-    echo "addn-hosts=${CUSTOM_LIST}" > /etc/dnsmasq.d/02-lan.conf
-  fi
-
   # add entry
   echo "${ip_address} ${fqdn}" >> ${CUSTOM_LIST}
 
@@ -94,6 +88,7 @@ function add_dns_entry() {
        sleep 0.6
        break
       fi
+    echo ${i}
     sleep 0.5
     done
   } | w_show_gauge "${title_of_installer}" "\n\nWaiting for the changes to come active..."
