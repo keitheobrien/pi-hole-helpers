@@ -111,7 +111,7 @@ function remove_dns_entry() {
   if [ -e ${CUSTOM_LIST} ]
   then
     # remove entry
-    sed -i '/${fqdn}/d' ${CUSTOM_LIST}
+    sudo sed -i "/${fqdn}/d" ${CUSTOM_LIST}
   fi
 
   # reload dnsmasq service
