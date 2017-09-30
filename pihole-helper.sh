@@ -73,7 +73,7 @@ function add_dns_entry() {
   # Wait for the changes to take effect
   {
     echo 0
-    for i in {1..100..5}
+    for i in {0..100..5}
     do
       if [ ${i} -eq 95 ]
       then
@@ -84,11 +84,10 @@ function add_dns_entry() {
       if nslookup "${fqdn}" | grep -q ${ip_address}
       then
        echo 100
-       sleep 0.6
+       sleep 1
        break
       fi
-    echo ${i}
-    sleep 0.5
+      echo ${i}
     done
   } | w_show_gauge "${title_of_installer}" "\n\nWaiting for the changes to come active..."
 
