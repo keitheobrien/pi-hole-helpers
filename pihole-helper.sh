@@ -96,7 +96,6 @@ function add_dns_entry() {
   w_show_message "${title_of_installer}" "\n\nYou can now reach your device on http://${fqdn}\nHave fun!"
 }
 
-
 function remove_dns_entry() {
   # show welcome message
   if ! ( w_ask_yesno "${title_of_installer}" "\n\nThis will remove a custom DNS entry from your pi-hole so that you can't reach a certain local devices anymore using a readable url.\n\n\nDo you want to continue?" )
@@ -104,21 +103,44 @@ function remove_dns_entry() {
     exit 1
   fi
 
-  # get address
-  ask_fqdn
+  # TODO SHOW SCROLLBARS WHEN MANY ENTRIES
+
+  # Get the urls that the user wants to delete
+  # This is not in whiptail.sh because it was easier to program it here
+  url_array=($(cat ${CUSTOM_LIST} | awk '{print $2;}'))
+  number_of_options=$(wc -l < ${CUSTOM_LIST})
+  parameters=( --title "${title_of_installer}" --checklist "Select the ones that you want to remove:" ${r_whiptail} ${c_whiptail} ${number_of_options} )
+  i=0
+  while [[ $i -lt ${#url_array[@]} ]]
+  do
+    parameters+=( "${url_array[$i]}" "" off )
+    i=$[$i+1]
+  done
+  choices=$(whiptail "${parameters[@]}" 3>&2 2>&1 1>&3)
+  # if cancelled, exit
+  if [ $? -ne 0 ]; then exit 0; fi
 
   # check if the custom conf file exists
   if [ -e ${CUSTOM_LIST} ]
   then
-    # remove entry
-    sudo sed -i "/${fqdn}/d" ${CUSTOM_LIST}
+    # remove selected entry
+    for choice in ${choices}
+    do
+      choice=$(echo "$choice" | tr -d '"') # removes quotes
+      sudo sed -i "/${choice}/d" ${CUSTOM_LIST}
+    done
   fi
 
   # reload dnsmasq service
   service dnsmasq restart &
 
-  w_show_message "${title_of_installer}" "\n\nThe DNS entry for http://${fqdn} has been removed.\nHave fun!"
+  w_show_message "${title_of_installer}" "\n\nThe DNS entries have been removed.\nHave fun!"
 }
+
+
+
+
+
 
 # ------------------------------------------------------------------------------
 
