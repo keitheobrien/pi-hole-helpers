@@ -13,6 +13,7 @@ function display_help() {
   echo "The following arguments are allowed:"
   echo -e "\t-a | --add-dns-entry\t\tAdd a custom DNS entry (default argument)."
   echo -e "\t-r | --remove-dns-entry\t\tRemove a custom DNS entry."
+  echo -e "\t-l | --list\t\tList your current custom entries."
 
 }
 
@@ -160,6 +161,10 @@ do
       -r|--remove-dns-entry)
       ADD_ENTRY=false
       shift
+      ;;
+      -l|--list)
+      cat ${CUSTOM_LIST}
+      exit 0
       ;;
       --change-host-name)
       change_host_name
