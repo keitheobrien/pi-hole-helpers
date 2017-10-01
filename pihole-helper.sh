@@ -52,6 +52,8 @@ function ask_fqdn() {
 }
 
 function add_dns_entry() {
+  # TODO check for existing url
+
   # show welcome message
   if ! ( w_ask_yesno "${title_of_installer}" "\n\nThis will add a custom DNS entry to your pi-hole so that you can reach local devices using a readable url (e.g. movie.server).\n\n\nDo you want to continue?" )
   then
